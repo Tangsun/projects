@@ -751,3 +751,14 @@ a:focus {
 
 
 
+/* Alternating section background + soft separators */
+.bg-alt { background: #f6f8fb; }               /* light gray-blue */
+.section + .section { border-top: 1px solid rgba(0,0,0,0.04); }
+
+/* Optional: nicer figure caption */
+.figure-caption {
+  margin-top: .5rem;
+  color: #6b7280;  /* gray-500 */
+  font-size: 0.9rem;
+  line-height: 1.35;
+}

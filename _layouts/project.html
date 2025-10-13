@@ -143,6 +143,48 @@
     </section>
     {% endif %}
 
+    {% if page.sections %}
+      {% for s in page.sections %}
+        {% assign odd = forloop.index0 | modulo: 2 %}
+        <section class="section {% if odd == 1 %}bg-alt{% endif %}">
+          <div class="container is-max-desktop">
+            {% if s.title %}
+              <h2 class="title is-3" id="{{ s.id | default: s.title | slugify }}">{{ s.title }}</h2>
+            {% endif %}
+
+            {# image-first option #}
+            {% if s.image and s.image_first %}
+              <figure class="image" style="margin-bottom:1rem;">
+                <img src="{{ s.image.src | relative_url }}" alt="{{ s.image.alt | default: s.title }}">
+                {% if s.image.caption %}<figcaption class="figure-caption">{{ s.image.caption }}</figcaption>{% endif %}
+              </figure>
+            {% endif %}
+
+            {% if s.html %}
+              <div class="content">{{ s.html }}</div>
+            {% elsif s.md %}
+              <div class="content">{{ s.md | markdownify }}</div>
+            {% endif %}
+
+            {% if s.image and s.image_first != true %}
+              <figure class="image" style="margin-top:1rem;">
+                <img src="{{ s.image.src | relative_url }}" alt="{{ s.image.alt | default: s.title }}">
+                {% if s.image.caption %}<figcaption class="figure-caption">{{ s.image.caption }}</figcaption>{% endif %}
+              </figure>
+            {% endif %}
+
+            {% if s.links %}
+              <p style="margin-top:.75rem;">
+                {% for link in s.links %}
+                  <a class="button is-small is-rounded is-light" href="{{ link.href }}" target="_blank" rel="noopener">{{ link.label }}</a>
+                {% endfor %}
+              </p>
+            {% endif %}
+          </div>
+        </section>
+      {% endfor %}
+    {% endif %}
+
     <!-- Image carousel -->
     {% if page.carousel_images %}
     <section class="hero is-small">
