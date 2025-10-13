@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include head_meta.html %}
+</head>
+<body>
+  <main class="container is-max-desktop" style="padding: 2rem 1rem;">
+    {{ content }}
+  </main>
+
+  <!-- JS -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="{{ '/static/js/fontawesome.all.min.js' | relative_url }}"></script>
+  <script defer src="{{ '/static/js/bulma-carousel.min.js' | relative_url }}"></script>
+  <script defer src="{{ '/static/js/bulma-slider.min.js' | relative_url }}"></script>
+  <script defer src="{{ '/static/js/index.js' | relative_url }}"></script>
+</body>
+</html>

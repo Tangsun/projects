@@ -1,0 +1,27 @@
+{% assign has_authors = page.authors and page.authors.size > 0 %}
+
+<div class="is-size-5 publication-authors">
+  {% if has_authors %}
+    {% for a in page.authors %}
+      <span class="author-block">
+        {% if a.url %}
+          <a href="{{ a.url }}" target="_blank" rel="noopener">{{ a.name }}</a>
+        {% else %}
+          {{ a.name }}
+        {% endif %}
+        {% if a.equal %}<sup>*</sup>{% endif %}{% unless forloop.last %},{% endunless %}
+      </span>
+    {% endfor %}
+  {% else %}
+    <span class="author-block">{{ site.owner.name }}</span>
+  {% endif %}
+</div>
+
+<div class="is-size-5 publication-authors">
+  <span class="author-block">
+    {{ page.affiliation | default: site.owner.name }}<br>{{ page.venue }}
+  </span>
+  {% if page.equal_contrib %}
+    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+  {% endif %}
+</div>

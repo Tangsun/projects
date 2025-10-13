@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include head_meta.html %}
+</head>
+<body>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- More Projects Dropdown -->
+  <div class="more-works-container">
+    <button class="more-works-btn" onclick="toggleMoreWorks()" title="See more of my work">
+      <i class="fas fa-user-astronaut"></i>
+      More Projects
+      <i class="fas fa-chevron-down dropdown-arrow"></i>
+    </button>
+    <div class="more-works-dropdown" id="moreWorksDropdown">
+      <div class="dropdown-header">
+        <h4>More by {{ site.owner.name }}</h4>
+        <button class="close-btn" onclick="toggleMoreWorks()"><i class="fas fa-times"></i></button>
+      </div>
+      {% include more_projects.html %}
+    </div>
+  </div>
+
+  <main id="main-content">
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+
+              <h1 class="title is-1 publication-title">{{ page.title }}</h1>
+
+              {% include authors.html %}
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  {% assign arxiv_abs = nil %}
+                  {% assign arxiv_pdf = nil %}
+                  {% if page.arxiv %}
+                    {% if page.arxiv contains '://' %}
+                      {% assign arxiv_abs = page.arxiv %}
+                    {% else %}
+                      {% assign arxiv_abs = 'https://arxiv.org/abs/' | append: page.arxiv %}
+                      {% assign arxiv_pdf = 'https://arxiv.org/pdf/' | append: page.arxiv | append: '.pdf' %}
+                    {% endif %}
+                  {% endif %}
+
+                  {% if page.pdf or arxiv_pdf %}
+                  <span class="link-block">
+                    <a href="{{ page.pdf | default: arxiv_pdf | absolute_url }}" target="_blank"
+                       class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span>
+                    </a>
+                  </span>
+                  {% endif %}
+
+                  {% if page.supplementary %}
+                  <span class="link-block">
+                    <a href="{{ page.supplementary | absolute_url }}" target="_blank"
+                       class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Supplementary</span>
+                    </a>
+                  </span>
+                  {% endif %}
+
+                  {% if page.code %}
+                  <span class="link-block">
+                    <a href="{{ page.code }}" target="_blank"
+                       class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fab fa-github"></i></span><span>Code</span>
+                    </a>
+                  </span>
+                  {% endif %}
+
+                  {% if arxiv_abs %}
+                  <span class="link-block">
+                    <a href="{{ arxiv_abs }}" target="_blank"
+                       class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
+                    </a>
+                  </span>
+                  {% endif %}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teaser: mp4 or YouTube -->
+    {% if page.video_teaser %}
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <video poster="{{ page.video_poster | absolute_url }}" id="teaser"
+                 autoplay controls muted loop height="100%" preload="metadata">
+            <source src="{{ page.video_teaser | absolute_url }}" type="video/mp4">
+          </video>
+          {% if page.video_caption %}
+            <h2 class="subtitle has-text-centered">{{ page.video_caption }}</h2>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+    {% elsif page.youtube_id %}
+    <section class="hero is-small is-light">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title is-3">Video Presentation</h2>
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <div class="publication-video">
+                <iframe src="https://www.youtube.com/embed/{{ page.youtube_id }}"
+                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- Abstract -->
+    {% if page.abstract or content %}
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              {% if page.abstract %}{{ page.abstract }}{% else %}{{ content }}{% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- Image carousel -->
+    {% if page.carousel_images %}
+    <section class="hero is-small">
+      <div class="hero-body">
+        <div class="container">
+          <div id="results-carousel" class="carousel results-carousel">
+            {% for img in page.carousel_images %}
+            <div class="item">
+              <img src="{{ img.src | relative_url }}" alt="{{ img.alt | default: 'Result figure' }}" loading="lazy"/>
+              {% if img.caption %}
+                <h2 class="subtitle has-text-centered">{{ img.caption }}</h2>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- Secondary YouTube (optional) -->
+    {% if page.youtube_id_2 %}
+    <section class="hero is-small is-light">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title is-3">Video Presentation</h2>
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <div class="publication-video">
+                <iframe src="https://www.youtube.com/embed/{{ page.youtube_id_2 }}"
+                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- Video carousel -->
+    {% if page.video_clips %}
+    <section class="hero is-small">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title is-3">More Results</h2>
+          <div id="video-carousel" class="carousel results-carousel">
+            {% for clip in page.video_clips %}
+            <div class="item">
+              <video poster="{{ clip.poster | absolute_url }}" controls muted loop height="100%" preload="metadata">
+                <source src="{{ clip.src | relative_url }}" type="video/mp4">
+              </video>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- Poster -->
+    {% if page.poster %}
+    <section class="hero is-small is-light">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title">Poster</h2>
+          <iframe src="{{ page.poster | absolute_url }}" width="100%" height="550" title="Poster PDF"></iframe>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- BibTeX -->
+    {% if page.bibtex %}
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <div class="bibtex-header">
+          <h2 class="title">BibTeX</h2>
+          <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+            <i class="fas fa-copy"></i><span class="copy-text">Copy</span>
+          </button>
+        </div>
+        <pre id="bibtex-code"><code>{{ page.bibtex | strip }}</code></pre>
+      </div>
+    </section>
+    {% endif %}
+
+    <footer class="footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p>
+                This page adapts the
+                <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">
+                  Academic Project Page Template</a>.
+                Content © {{ site.owner.name }}.
+                <br>This website is licensed under a
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">
+                  CC BY-SA 4.0</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- JS -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="{{ '/static/js/fontawesome.all.min.js' | relative_url }}"></script>
+  <script defer src="{{ '/static/js/bulma-carousel.min.js' | relative_url }}"></script>
+  <script defer src="{{ '/static/js/bulma-slider.min.js' | relative_url }}"></script>
+  <script defer src="{{ '/static/js/index.js' | relative_url }}"></script>
+</body>
+</html>

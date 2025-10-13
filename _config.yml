@@ -1,0 +1,41 @@
+title: "Sunbochen Tang"
+description: "Personal website: research, projects, notes."
+url: "https://tangsun.github.io"   # or your custom domain
+baseurl: ""                            # "" for root user site; "/subpath" if needed
+
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# GitHub Pages–friendly plugins (optional but nice)
+plugins:
+  - jekyll-sitemap
+
+# One collection for your project pages
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+# Defaults so every file in _projects uses the project layout
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+
+# Your personal details (used for meta and JSON-LD)
+owner:
+  name: "Sunbochen Tang"
+  email: "tangsun@mit.edu"
+  avatar: "/static/images/avatar.jpg"
+  same_as:              # social profiles for Person JSON-LD
+    - "https://github.com/tangsun"
+    # - "https://twitter.com/tangsun"
+    - "https://https://scholar.google.com/citations?user=7xtBYY8AAAAJ&hl=en"
+    # - "https://www.linkedin.com/in/<id>"
+
+# Twitter/X card defaults
+# twitter:
+#   site: "@<handle>"     # your handle, used as default creator

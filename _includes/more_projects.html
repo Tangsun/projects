@@ -1,0 +1,18 @@
+<div class="works-list">
+  {% if page.related %}
+    {% assign others = site.projects | where_exp: 'p', 'page.related contains p.name' %}
+  {% else %}
+    {% assign others = site.projects | where_exp: 'p', 'p.url != page.url' | sort: 'year' | reverse | slice: 0, 3 %}
+  {% endif %}
+
+  {% for p in others %}
+    <a href="{{ p.url | relative_url }}" class="work-item">
+      <div class="work-info">
+        <h5>{{ p.title }}</h5>
+        <p>{{ p.description }}</p>
+        <span class="work-venue">{{ p.venue }}{% if p.year %} {{ p.year }}{% endif %}</span>
+      </div>
+      <i class="fas fa-arrow-right"></i>
+    </a>
+  {% endfor %}
+</div>
