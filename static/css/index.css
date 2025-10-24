@@ -290,6 +290,49 @@ body {
   font-weight: 500;
 }
 
+figure.image {
+  text-align: center;
+}
+
+figure.image img {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+}
+
+figure.image img:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.pdf-figure {
+  text-align: center;
+}
+
+.pdf-image {
+  width: 100%;
+  height: 520px;
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+}
+
+.pdf-fallback {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.figure-caption {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
 /* Pagination and Misc Improvements */
 .slider-pagination .slider-page {
   background: var(--primary-color);
@@ -318,16 +361,27 @@ body {
   padding-bottom: 1rem;
 }
 
+.title.is-3 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.35rem;
+}
+
 .title.is-3::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
+  left: 0;
+  transform: none;
+  width: 100%;
+  height: 4px;
   background: var(--gradient-accent);
   border-radius: 2px;
+}
+
+.has-text-centered .title.is-3::after {
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* Content Improvements */

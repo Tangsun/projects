@@ -6,6 +6,11 @@ baseurl: ""                            # "" for root user site; "/subpath" if ne
 markdown: kramdown
 highlighter: rouge
 permalink: pretty
+kramdown:
+  input: GFM
+  math_engine: mathjax
+  math_engine_opts:
+    preview: none
 
 # GitHub Pages–friendly plugins (optional but nice)
 plugins:
@@ -24,6 +29,7 @@ defaults:
       type: projects
     values:
       layout: project
+      mathjax: true
 
 # Your personal details (used for meta and JSON-LD)
 owner:

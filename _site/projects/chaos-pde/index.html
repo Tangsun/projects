@@ -62,8 +62,9 @@
 <!-- Favicons / theme -->
 <meta name="theme-color" content="#2563eb">
 <meta name="msapplication-TileColor" content="#2563eb">
-<link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
-<link rel="apple-touch-icon" href="/static/images/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
+<link rel="alternate icon" type="image/x-icon" href="/static/images/favicon.ico">
+<link rel="apple-touch-icon" href="/static/images/favicon.svg">
 
 <!-- Fonts & CSS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,6 +85,22 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 </noscript>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- MathJax v3 setup -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)'], ['$', '$']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true
+    },
+    options: {
+      skipHtmlTags: ['script','noscript','style','textarea','pre','code']
+    }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 
 <!-- JSON-LD: ScholarlyArticle for this project page -->
 <script type="application/ld+json">
@@ -127,6 +144,9 @@
 }
 </script>
 
+  
+  <script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
 </head>
 <body>
 

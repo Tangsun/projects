@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   {% include head_meta.html %}
+  {% if page.mathjax or site.mathjax %}
+  <script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  {% endif %}
 </head>
 <body>
 
@@ -151,11 +154,33 @@
             {% if s.title %}
               <h2 class="title is-3" id="{{ s.id | default: s.title | slugify }}">{{ s.title }}</h2>
             {% endif %}
-
-            {# image-first option #}
+            {% assign image_ext = '' %}
+            {% assign figure_width = '' %}
+            {% assign width_value = '' %}
+            {% assign width_suffix = '' %}
+            {% if s.image %}
+              {% assign image_ext = s.image.src | downcase | split: '.' | last %}
+              {% assign figure_width = s.image.width | default: page.image_width | default: 80 %}
+              {% assign width_value = figure_width | append: '' %}
+              {% assign width_suffix = '%' %}
+              {% if width_value contains '%' %}
+                {% assign width_suffix = '' %}
+              {% endif %}
+            {% endif %}
+            <!-- image-first option -->
             {% if s.image and s.image_first %}
-              <figure class="image" style="margin-bottom:1rem;">
-                <img src="{{ s.image.src | relative_url }}" alt="{{ s.image.alt | default: s.title }}">
+              {% capture figure_style -%}
+              margin-bottom:1rem;{% if width_value != '' %} max-width:{{ width_value }}{{ width_suffix }}; margin-left:auto; margin-right:auto;{% endif %}
+              {%- endcapture %}
+              <figure class="image {% if image_ext == 'pdf' %}pdf-figure{% endif %}" style="{{ figure_style | strip }}">
+                {% if image_ext == 'pdf' %}
+                  <object data="{{ s.image.src | relative_url }}" type="application/pdf" aria-label="{{ s.image.alt | default: s.title }}" class="pdf-image">
+                    <iframe src="{{ s.image.src | relative_url }}" title="{{ s.image.alt | default: s.title }}"></iframe>
+                    <p class="pdf-fallback">Your browser can’t display this PDF. <a href="{{ s.image.src | relative_url }}" target="_blank" rel="noopener">Download it instead</a>.</p>
+                  </object>
+                {% else %}
+                  <img src="{{ s.image.src | relative_url }}" alt="{{ s.image.alt | default: s.title }}">
+                {% endif %}
                 {% if s.image.caption %}<figcaption class="figure-caption">{{ s.image.caption }}</figcaption>{% endif %}
               </figure>
             {% endif %}
@@ -167,8 +192,18 @@
             {% endif %}
 
             {% if s.image and s.image_first != true %}
-              <figure class="image" style="margin-top:1rem;">
-                <img src="{{ s.image.src | relative_url }}" alt="{{ s.image.alt | default: s.title }}">
+              {% capture figure_style -%}
+              margin-top:1rem;{% if width_value != '' %} max-width:{{ width_value }}{{ width_suffix }}; margin-left:auto; margin-right:auto;{% endif %}
+              {%- endcapture %}
+              <figure class="image {% if image_ext == 'pdf' %}pdf-figure{% endif %}" style="{{ figure_style | strip }}">
+                {% if image_ext == 'pdf' %}
+                  <object data="{{ s.image.src | relative_url }}" type="application/pdf" aria-label="{{ s.image.alt | default: s.title }}" class="pdf-image">
+                    <iframe src="{{ s.image.src | relative_url }}" title="{{ s.image.alt | default: s.title }}"></iframe>
+                    <p class="pdf-fallback">Your browser can’t display this PDF. <a href="{{ s.image.src | relative_url }}" target="_blank" rel="noopener">Download it instead</a>.</p>
+                  </object>
+                {% else %}
+                  <img src="{{ s.image.src | relative_url }}" alt="{{ s.image.alt | default: s.title }}">
+                {% endif %}
                 {% if s.image.caption %}<figcaption class="figure-caption">{{ s.image.caption }}</figcaption>{% endif %}
               </figure>
             {% endif %}
