@@ -1,7 +1,7 @@
 title: "Sunbochen Tang"
 description: "Personal website: research, projects, notes."
 url: "https://tangsun.github.io"   # or your custom domain
-baseurl: ""                            # "" for root user site; "/subpath" if needed
+baseurl: "/projects"                            # "" for root user site; "/subpath" if needed
 
 markdown: kramdown
 highlighter: rouge
@@ -20,7 +20,7 @@ plugins:
 collections:
   projects:
     output: true
-    permalink: /projects/:name/
+    permalink: /:name/
 
 # Defaults so every file in _projects uses the project layout
 defaults:
