@@ -2,32 +2,32 @@
 title: "ECO: Energy-Constrained Operator Learning for Chaotic Dynamics with Boundedness Guarantees"
 description: "We introduce the Energy-Constrained Operator (ECO), a framework that learns chaotic dynamics while enforcing provable trajectory boundedness. ECO uses a learnable energy function and a novel convex quadratic projection layer to guarantee long-term stability and preserve invariant statistics for chaotic PDEs."
 authors:
-  - { name: "Sunbochen Tang", url: "https://https://tangsun.github.io", equal: true }
-  - { name: "Andrea Goertzen", url: "https://https://www.linkedin.com/in/andrea-goertzen/", equal: true }
+  - { name: "Andrea Goertzen", url: "https://www.linkedin.com/in/andrea-goertzen/", equal: true }
+  - { name: "Sunbochen Tang", url: "https://tangsun.github.io", equal: true }
   - { name: "Navid Azizan", url: "https://azizan.mit.edu/index.html"}
 affiliation: "Massachusetts Institute of Technology"
-venue: "Preprint"          # or "NeurIPS 2025 (to appear)"
+venue: "L4DC 2026 — Best Paper Award"
 equal_contrib: true
-# year: 2026
+year: 2026
 # pdf: /static/pdfs/eco_pde.pdf
 # poster: /static/pdfs/eco_pde_poster.pdf
 # social_image: /static/images/chaos-learning/eco_social_preview.png
 keywords: [chaos, dynamical systems, dissipativity, machine learning, forecasting, pde, operator learning, boundedness guarantees]
 published_time: 2025-10-26T00:00:00.000Z
 related: []
-# bibtex: |
-#   @inproceedings{tang2026eco,
-#     title={{ECO}: {E}nergy-{C}onstrained {O}perator {L}earning for {C}haotic {D}ynamics with {B}oundedness {G}uarantees},
-#     author={Anonymous},
-#     booktitle={International Conference on Learning Representations},
-#     year={2026}
-#   }
+bibtex: |
+  @inproceedings{goertzen2026eco,
+    title={{ECO}: {E}nergy-{C}onstrained {O}perator {L}earning for {C}haotic {D}ynamics with {B}oundedness {G}uarantees},
+    author={Goertzen, Andrea and Tang, Sunbochen and Azizan, Navid},
+    booktitle={Proceedings of the 8th Annual Learning for Dynamics and Control Conference (L4DC)},
+    year={2026}
+  }
 sections:
 - title: "Problem Formulation"
   md: |
-    Data-driven models for chaotic partial differential equations (PDEs) often fail during long-horizon forecasting due to a phenomenon called "finite-time blowup". Small, accumulating prediction errors are amplified by the system's chaotic nature, causing trajectories to diverge to unbounded, non-physical values. Our objective is to learn a neural operator for dissipative chaotic systems that preserves the statistical properties of the true dynamics by guaranteeing model stability and preventing this failure model.
+    Data-driven models for chaotic partial differential equations (PDEs) often fail during long-horizon forecasting due to a phenomenon known as "finite-time blowup". Small, accumulating prediction errors are amplified by the system's chaotic nature, causing trajectories to diverge to unbounded, non-physical values. Our objective is to learn a neural operator for dissipative chaotic systems that preserves the statistical properties of the true dynamics by guaranteeing model stability and preventing this failure mode.
 - title: "Method Overview"
-  image: { src: /static/images/chaos-pde/method.png, alt: "Architecture enforcing dissipativity", caption: "Our Energy-Constrained Operator (ECO) uses an unconstrained backbone, a learned energy functional, and a dissipative projection layer to guarantee boundedness." }
+  image: { src: /static/images/chaos-pde/method.png, width: 100, alt: "Architecture enforcing dissipativity", caption: "Our Energy-Constrained Operator (ECO) uses an unconstrained backbone, a learned energy functional, and a dissipative projection layer to guarantee boundedness." }
   md: |
     We introduce the Energy-Constrained Operator (ECO), a framework that learns dissipative dynamics by construction. It consists of two learnable components: an unconstrained neural operator backbone (e.g., DeepONet) and a quadratic, energy-like Lyapunov functional. These are integrated into a novel **convex quadratic projection layer** that enforces a computationally efficient dissipativity condition, ensuring the learned model's predictions remain bounded.
 - title: "Certified Boundedness"
@@ -36,7 +36,8 @@ sections:
 - title: "Experiments"
   image: { src: /static/images/chaos-pde/NS_snapshots.png, alt: "Forecast accuracy plots", caption: "Comparison on the Kuramoto-Sivashinsky and 2D Navier-Stokes equations." }
   md: |
-    We demonstrate ECO's effectiveness on the Lorenz 63, Kuramoto-Sivashinsky (KS), and 2D Navier-Stokes equations with Kolmogorov forcing. In all cases, the unconstrained DeepONet baseline quickly becomes unstable and its predictions blow up. In contrast, ECO produces stable, long-horizon forecasts that accurately recover the complex spatio-temporal patterns and invariant statistics of the true dynamics. Quantitative metrics show ECO achieves significantly lower KL divergence and log-spectral distance compared to the baselineitle: "Ablations & Robustness"
+    We demonstrate ECO's effectiveness on the Lorenz 63, Kuramoto-Sivashinsky (KS), and 2D Navier-Stokes equations with Kolmogorov forcing. In all cases, the unconstrained DeepONet baseline quickly becomes unstable and its predictions blow up. In contrast, ECO produces stable, long-horizon forecasts that accurately recover the complex spatio-temporal patterns and invariant statistics of the true dynamics. Quantitative metrics show ECO achieves significantly lower KL divergence and log-spectral distance compared to the baseline.
+- title: "Ablations & Robustness"
   md: |
     Comparing ECO to an identical DeepONet backbone without the projection layer highlights the critical role of our constraint. The unconstrained model consistently fails, producing unbounded trajectories and unstructured statistical distributions, while ECO remains stable and accurate. This demonstrates the importance of the boundedness guarantee for reliable forecasting. Notably, these stability gains are achieved without any prior knowledge of the system's statistics, as ECO learns the stabilizing energy function directly from data.
 ---

@@ -1,14 +1,14 @@
 ---
-title: "Learning Chaotic Dynamics with Embedded Dissipativity"
+title: "Learning Dissipative Chaotic Dynamics with Stability Guarantees"
 description: "Neural operator learns chaotic dissipative dynamics with a learned Lyapunov certificate to enforce bounded trajectories and preserve long-term statistics."
 authors:
   - { name: "Sunbochen Tang", url: "https://tangsun.github.io" }
   - { name: "Themistoklis Sapsis", url: "https://sandlab.mit.edu/about/" }
   - { name: "Navid Azizan", url: "https://azizan.mit.edu/index.html" }
 affiliation: "Massachusetts Institute of Technology"
-venue: "arXiv preprint"
+venue: "Accepted to the Proceedings of the National Academy of Sciences (PNAS)"
 equal_contrib: false
-year: 2024
+year: 2026
 arxiv: 2410.00976
 pdf: /static/pdfs/chaos_ode.pdf
 poster: /static/pdfs/chaos_ode_poster.pdf
@@ -17,11 +17,11 @@ keywords: [chaos, dynamical systems, dissipativity, machine learning, forecastin
 published_time: 2024-10-02T00:00:00.000Z
 related: []
 bibtex: |
-  @article{tang2024learning,
-    title={Learning Chaotic Dynamics with Embedded Dissipativity},
+  @article{tang2026learning,
+    title={Learning Dissipative Chaotic Dynamics with Stability Guarantees},
     author={Tang, Sunbochen and Sapsis, Themistoklis P. and Azizan, Navid},
-    journal={arXiv preprint arXiv:2410.00976},
-    year={2024}
+    journal={Proceedings of the National Academy of Sciences},
+    year={2026}
   }
 sections:
 - title: "Problem Formulation"

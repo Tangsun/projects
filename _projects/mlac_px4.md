@@ -6,7 +6,7 @@ authors:
   - { name: "Haoyuan Sun" }
   - { name: "Navid Azizan", url: "https://azizan.mit.edu/index.html" }
 affiliation: "Massachusetts Institute of Technology"
-venue: "L4DC 2025"
+venue: "L4DC 2025 — Oral Presentation, Best Paper Award Nominee"
 equal_contrib: false
 year: 2025
 arxiv: 2407.20165

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Home"
-description: "Projects by Your Name"
+description: "Projects by Sunbochen Tang"
 ---
 
 # Projects
